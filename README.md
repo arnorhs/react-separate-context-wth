@@ -1,30 +1,26 @@
-# React + TypeScript + Vite
+# React context + reducer state update demonstration
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+I saw an article on the react docs recommending that the state and dispatch functions of a
+`useReducer` can be put in separate context providers, as an optimization:
 
-Currently, two official plugins are available:
+[React docs: put-state-and-dispatch-into-context](https://react.dev/learn/scaling-up-with-reducer-and-context#step-2-put-state-and-dispatch-into-context)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+First off, I love the new react docs, and these articles are pretty thorough and great.
 
-## Expanding the ESLint configuration
+But I found this advice pretty strange, esp. given that when one of the values changes
+the other one is also going to change - so I put together this repo as a demonstration of this.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Look in the dev console to see that in fact they are both getting rendered as much.
 
-- Configure the top-level `parserOptions` property like this:
+There is always the possibility that I misunderstood something or there are further optimizations
+you can do to reap the benefits from this setup, but to me it seems like the kind of thing
+that adds needless complexity for a minimal benefit (compared to eg. using `useMemo` in the
+appropriate places) - and further makes things confusing for beginners who already have a
+hard time grasping reducers & contexts in general.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+## installation / running
+
+```sh
+bun install
+bun run dev
 ```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
